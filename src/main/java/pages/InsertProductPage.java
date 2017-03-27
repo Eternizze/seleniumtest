@@ -24,18 +24,49 @@ public class InsertProductPage {
 	public static WebElement productsTag;
 	@FindBy(linkText = "Data")
 	public static WebElement dataTab;
+	@FindBy(xpath = "//input[@name = 'model']")
+	public static WebElement modelInput;
+	@FindBy(xpath = "//input[@name = 'price']")
+	public static WebElement priceInput;
+	@FindBy(linkText= "Save")
+	public static WebElement saveButton;
 	
 	public static void goTo(){
 		ProductsPage.clickInsert();
-		PageFactory.initElements(Browser.driver, ProductsPage.class);
+		PageFactory.initElements(Browser.driver, InsertProductPage.class);
 	}
 	
 	public static void isAt(){
 		assertTrue(Browser.driver.getCurrentUrl().contains(URL));
 	}
 	
-	public static void populateGeneralTabFields(){
+	public static void populateGeneralTabFields(String name, String model, String price){
+		populateProductName(name);
+		gotoDataTab();
+		populateModel(model);
+		populatePrice(price);
+		clickSave();
+	}
+	
+	public static void populateProductName(String name){
+		productName.sendKeys(name);
+	}
+	
+	public static void populateModel(String model){
+		modelInput.sendKeys(model);
 		
+	}
+	
+	public static void populatePrice(String price){
+		priceInput.sendKeys(price);
+	}
+	
+	public static void clickSave(){
+		saveButton.click();
+	}
+	
+	public static void gotoDataTab(){
+		dataTab.click();
 	}
 
 }

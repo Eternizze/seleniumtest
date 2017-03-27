@@ -2,6 +2,8 @@ package pages;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -23,6 +25,7 @@ public class DashboardPage {
 	public static void open() {
 		AdminLogInPage.open();
 		AdminLogInPage.logIn(AdminLogInPage.USERNAME, AdminLogInPage.PASSWORD);
+		Browser.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		PageFactory.initElements(Browser.driver, DashboardPage.class);
 	}
 
