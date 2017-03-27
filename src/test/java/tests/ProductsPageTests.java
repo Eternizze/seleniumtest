@@ -38,6 +38,11 @@ public class ProductsPageTests {
 		ProductsPage.createProduct(NAME,MODEL,PRICE);
 		Assert.assertTrue(ProductsPage.successMsg.isDisplayed());
 		Assert.assertEquals("Wrong success message",SUCCESS, ProductsPage.successMsg.getText());
+		if(ProductsPage.isProductExist(NAME, MODEL, PRICE)){
+			System.out.println("Test Pass");
+		} else {
+			System.out.println("Test Fail");
+		}
 		
 	}
 

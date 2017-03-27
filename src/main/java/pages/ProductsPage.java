@@ -3,7 +3,9 @@ package pages;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -56,8 +58,11 @@ public class ProductsPage {
 	}
 	
 	public static boolean isProductExist(String name, String model, String price){
+		productNameFilter.clear();
 		productNameFilter.sendKeys(name);
+		modelFilter.clear();
 		modelFilter.sendKeys(model);
+		priceFilter.clear();
 		priceFilter.sendKeys(price);
 		filterButton.click();
 		try{
@@ -78,54 +83,13 @@ public class ProductsPage {
 		checkbox.click();
 		deleteButton.click();	
 		}
-	}
-	
-	public boolean isAlertPresent() {
-	    try {
-	        driver.switchTo().alert();
-	        return true;
-	    } // try
-	    catch (Exception e) {
-	        return false;
-	    } // catch
-	}
-	
-	public void checkAlert() {
-	    try {
-	        WebDriverWait wait = new WebDriverWait(driver, 2);
-	        wait.until(ExpectedConditions.alertIsPresent());
-	        Alert alert = driver.switchTo().alert();
+	        Alert alert = Browser.driver.switchTo().alert();
+	        try{
+	        assertEquals("Wrong alert message","Delete/Uninstall cannot be undone! Are you sure you want to do this?",alert.getText());
+	        } catch (Throwable e){
+	        	System.out.println("Wrong alert text");
+	        }
 	        alert.accept();
-	    } catch (Exception e) {
-	        //exception handling
-	    }
-	}
-	
-	http://toolsqa.com/selenium-webdriver/handling-of-alerts-javascript-alerts-and-popup-boxes/
-	
-	try 
-    {
-        //Handle the alert pop-up using seithTO alert statement
-        Alert alert = driver.switchTo().alert();
-
-        //Print alert is present
-        System.out.println("Alert is present");
-
-        //get the message which is present on pop-up
-        String message = alert.getText();
-
-        //print the pop-up message
-        System.out.println(message);
-
-        alert.sendKeys("");
-        //Click on OK button on pop-up
-        alert.accept();
-    } 
-    catch (NoAlertPresentException e) 
-    {
-        //if alert is not present print message
-        System.out.println("alert is not present");
-    }
-	
+	    } 
 
 }
