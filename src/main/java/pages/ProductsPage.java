@@ -35,6 +35,8 @@ public class ProductsPage {
 	public static WebElement filterButton;
 	@FindBy(linkText = "Delete")
 	public static WebElement deleteButton;
+//	@FindBy(xpath = "//tbody/tr[@class = not('filter')]")
+//	public static WebElement searchRows;
 
 	public static void open() {
 		DashboardPage.open();// izlishno da se pravi v tozi metod
@@ -81,6 +83,12 @@ public class ProductsPage {
 		populatePriceFilter(price);
 		clickFilterButton();
 	}
+	public static void searchProduct(String name) {
+		populateNameFilter(name);
+		clickFilterButton();
+	}
+	
+	
 
 	public static boolean isProductExist(String name, String model, String price) {
 		searchProduct(name, model, price);
@@ -98,7 +106,7 @@ public class ProductsPage {
 	}
 
 	public static void deleteProduct(String name, String model) {
-
+// trqbva da se opravi :D
 		List<WebElement> models = Browser.driver
 				.findElements(By.xpath("//td[.='" + name + "']//following-sibling::td[1]"));
 		for (WebElement m : models) {
@@ -119,6 +127,39 @@ public class ProductsPage {
 			System.out.println("Wrong alert text");
 		}
 		alert.accept();
+	}
+/**
+ * Check if product with given name exists in the search results list
+ * @param name the product that we are looking for
+ * @return true if product is in the list, false otherwise
+ */
+	public static boolean areThereMatchingResults(String name) {
+		
+		List<WebElement> searchResults = Browser.driver.findElements(By.xpath("//tbody/tr[@class = not('filter')]"));
+		
+		for(WebElement result : searchResults){
+			try{
+			result.findElement(By.xpath(".//td[.='No results!']"));
+			searchResults.remove(result);
+			break;
+			} catch (Throwable e){
+				System.out.println("do nothing remove");
+			}
+		}
+		
+		if(searchResults.size() == 0){
+			return false;
+		}
+		
+		for(WebElement result : searchResults){
+			try{
+			result.findElement(By.xpath(".//td[.='"+ name +"']"));
+			return true;
+			} catch (Throwable e){
+				System.out.println("do nothing");
+			}
+		}
+		return false;
 	}
 
 }

@@ -45,5 +45,15 @@ public class ProductsPageTests {
 		}
 
 	}
+	
+	@Test
+	public void addNewProduvtSecond(){
+		ProductsPage.isAt();
+		ProductsPage.searchProduct("proba_method_2");
+		if (ProductsPage.areThereMatchingResults("proba_method_2")) {
+			ProductsPage.deleteProduct(InsertProductPage.NAME, InsertProductPage.MODEL);
+		}
+		
+	}
 
 }
