@@ -41,7 +41,7 @@ public class InsertProductPage {
 
 	public static void createProduct(String name, String model, String price) {
 		ProductsPage.goToInsertProductPage();
-		InsertProductPage.populateFieldsForCreateProduct(name, model, price);
+		populateFieldsForCreateProduct(name, model, price);
 		clickSaveButton();
 	}
 

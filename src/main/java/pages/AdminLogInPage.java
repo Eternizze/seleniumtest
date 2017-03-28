@@ -24,6 +24,8 @@ public class AdminLogInPage {
 	public static WebElement warnning;
 	@FindBy(className = "heading")
 	public static WebElement loginFormHeading;
+	
+	// boolean isInit = false; posle pravim proverka dali e true i ako ne e chak togava vikame pagefactory
 
 	public static void open() {
 		Browser.driver.get(URL_ADMIN);

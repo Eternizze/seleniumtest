@@ -17,6 +17,8 @@ public class ProductsPageTests {
 		// Browser.init("firefox");
 		Browser.init("chrome");
 		AdminLogInPage.open();
+		//mogat da se nabutat vsichki stypki do "Products"(do stranicata na koqto trqbva da bydem)
+		ProductsPage.open();// predi beshe v testa addNewProduct / i po dobre da sa listnati otdelnite stypki /po izchusteni metodi
 	}
 
 	@After
@@ -27,14 +29,15 @@ public class ProductsPageTests {
 
 	@Test
 	public void addNewProduct() {
-		ProductsPage.open();
 		ProductsPage.isAt();
 		if (ProductsPage.isProductExist(InsertProductPage.NAME, InsertProductPage.MODEL, InsertProductPage.PRICE)) {
 			ProductsPage.deleteProduct(InsertProductPage.NAME, InsertProductPage.MODEL);
 		}
 		InsertProductPage.createProduct(InsertProductPage.NAME, InsertProductPage.MODEL, InsertProductPage.PRICE);
+		
 		Assert.assertTrue(ProductsPage.successMsg.isDisplayed());
 		Assert.assertEquals("Wrong success message", ProductsPage.SUCCESS, ProductsPage.successMsg.getText());
+		
 		if (ProductsPage.isProductExist(InsertProductPage.NAME, InsertProductPage.MODEL, InsertProductPage.PRICE)) {
 			System.out.println("Test Pass");
 		} else {

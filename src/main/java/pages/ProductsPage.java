@@ -37,7 +37,7 @@ public class ProductsPage {
 	public static WebElement deleteButton;
 
 	public static void open() {
-		DashboardPage.open();
+		DashboardPage.open();// izlishno da se pravi v tozi metod
 		Action.hoverElement(DashboardPage.catalogNavLink);
 		Action.clickNotVisible(DashboardPage.productsNavLink);
 		PageFactory.initElements(Browser.driver, ProductsPage.class);
