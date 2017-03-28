@@ -34,16 +34,17 @@ public class InsertProductPage {
 	@FindBy(linkText = "Save")
 	public static WebElement saveButton;
 
+	public static void isAt() {
+		assertTrue(Browser.driver.getCurrentUrl().contains(URL));
+		PageFactory.initElements(Browser.driver, InsertProductPage.class);
+	}
+
 	public static void createProduct(String name, String model, String price) {
 		ProductsPage.goToInsertProductPage();
 		InsertProductPage.populateFieldsForCreateProduct(name, model, price);
 		clickSaveButton();
 	}
 
-	public static void isAt() {
-		assertTrue(Browser.driver.getCurrentUrl().contains(URL));
-		PageFactory.initElements(Browser.driver, InsertProductPage.class);
-	}
 
 	public static void populateFieldsForCreateProduct(String name, String model, String price) {
 		populateProductName(name);
