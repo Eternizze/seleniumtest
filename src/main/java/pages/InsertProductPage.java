@@ -42,6 +42,7 @@ public class InsertProductPage {
 
 	public static void isAt() {
 		assertTrue(Browser.driver.getCurrentUrl().contains(URL));
+		PageFactory.initElements(Browser.driver, InsertProductPage.class);
 	}
 
 	public static void populateFieldsForCreateProduct(String name, String model, String price) {

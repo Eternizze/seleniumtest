@@ -54,7 +54,6 @@ public class ProductsPage {
 	public static void goToInsertProductPage() {
 		clickInsert();
 		InsertProductPage.isAt();
-		PageFactory.initElements(Browser.driver, InsertProductPage.class);
 	}
 
 	public static void populateNameFilter(String name) {
