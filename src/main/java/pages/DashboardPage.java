@@ -35,11 +35,7 @@ public class DashboardPage {
 	}
 
 	public static void logout() {
-
 		Action.clickNotVisible(logoutLink);
-		// Actions build = new Actions(Browser.driver);
-		// build.click(logoutLink).perform();
-
 	}
 
 }

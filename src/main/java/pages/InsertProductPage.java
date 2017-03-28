@@ -9,9 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
 public class InsertProductPage {
-	
+
 	public final static String URL = "http://shop.pragmatic.bg/admin/index.php?route=catalog/product/insert";
-	
+	public final static String NAME = "Telephone";
+	public final static String MODEL = "M100";
+	public final static String PRICE = "100.30";
+
 	@FindBy(xpath = "//input[@name='product_description[1][name]']")
 	public static WebElement productName;
 	@FindBy(xpath = "//textarea[@name = 'product_description[1][meta_description]']")
@@ -28,44 +31,44 @@ public class InsertProductPage {
 	public static WebElement modelInput;
 	@FindBy(xpath = "//input[@name = 'price']")
 	public static WebElement priceInput;
-	@FindBy(linkText= "Save")
+	@FindBy(linkText = "Save")
 	public static WebElement saveButton;
-	
-	public static void goTo(){
-		ProductsPage.clickInsert();
-		PageFactory.initElements(Browser.driver, InsertProductPage.class);
+
+	public static void createProduct(String name, String model, String price) {
+		ProductsPage.goToInsertProductPage();
+		InsertProductPage.populateFieldsForCreateProduct(name, model, price);
+		clickSaveButton();
 	}
-	
-	public static void isAt(){
+
+	public static void isAt() {
 		assertTrue(Browser.driver.getCurrentUrl().contains(URL));
 	}
-	
-	public static void populateGeneralTabFields(String name, String model, String price){
+
+	public static void populateFieldsForCreateProduct(String name, String model, String price) {
 		populateProductName(name);
 		gotoDataTab();
 		populateModel(model);
 		populatePrice(price);
-		clickSave();
 	}
-	
-	public static void populateProductName(String name){
+
+	public static void populateProductName(String name) {
 		productName.sendKeys(name);
 	}
-	
-	public static void populateModel(String model){
+
+	public static void populateModel(String model) {
 		modelInput.sendKeys(model);
-		
+
 	}
-	
-	public static void populatePrice(String price){
+
+	public static void populatePrice(String price) {
 		priceInput.sendKeys(price);
 	}
-	
-	public static void clickSave(){
+
+	public static void clickSaveButton() {
 		saveButton.click();
 	}
-	
-	public static void gotoDataTab(){
+
+	public static void gotoDataTab() {
 		dataTab.click();
 	}
 
